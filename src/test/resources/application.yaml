@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:15.3:///test
+    username: backend
+    password: backend
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

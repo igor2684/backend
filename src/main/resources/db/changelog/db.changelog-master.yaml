@@ -1,0 +1,118 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: developer
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: varchar(256)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: password
+                  type: varchar(256)
+              - column:
+                  name: account_non_expired
+                  type: boolean
+                  defaultValue: true
+              - column:
+                  name: account_non_locked
+                  type: boolean
+                  defaultValue: true
+              - column:
+                  name: credentials_non_expired
+                  type: boolean
+                  defaultValue: true
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValue: true
+              - column:
+                  name: role_id
+                  type: bigint
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(256)
+        - createTable:
+            tableName: projects
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(256)
+              - column:
+                  name: status
+                  type: varchar(256)
+        - createTable:
+            tableName: documents
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: project_id
+                  type: bigint
+              - column:
+                  name: status
+                  type: varchar(256)
+              - column:
+                  name: file_path
+                  type: text
+  - changeSet:
+      id: 2
+      author: developer
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'ROLE_ADMIN'
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'ROLE_EDITOR'
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: name
+                  value: 'ROLE_READER'
+  - changeSet:
+      id: 3
+      author: developer
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: 'admin'
+              - column:
+                  name: password
+                  value: '$2a$10$ANV/x6i/aoOVCdQX3LTlxuEjq33.09cWYzZB6sGFMoyx2vvg/plni'
+              - column:
+                  name: role_id
+                  value: '1'
